@@ -1,0 +1,20 @@
+<h1><%= @date.strftime("%B %Y") %></h1>
+<%= link_to "Previous", root_path(date: @date.prev_month) %>
+<%= link_to "Next", root_path(date: @date.next_month) %>
+
+<table>
+  <tr>
+    <% Date::DAYNAMES.each do |day| %>
+      <th><%= day %></th>
+    <% end %>
+  </tr>
+  <% @days.each_slice(7) do |week| %>
+    <tr>
+      <% week.each do |day| %>
+        <td>
+          <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

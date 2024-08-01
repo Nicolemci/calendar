@@ -1,0 +1,20 @@
+<h1>Calendar#show</h1>
+<p>Find me in app/views/calendar/show.html.erb</p>
+<h1>Tasks for <%= @day.date.strftime("%B %d, %Y") %></h1>
+<%= link_to "Back to Calendar", root_path %>
+
+<table>
+  <% (0..23).each do |hour| %>
+    <tr>
+      <td><%= hour %>:00</td>
+      <td>
+        <% task = @tasks.find { |t| t.start_time.hour == hour } %>
+        <% if task %>
+          <%= task.title %> - <%= task.description %>
+        <% else %>
+          <%= link_to "Add Task", new_task_path(day_id: @day.id, hour: hour) %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
