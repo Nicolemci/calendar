@@ -100,11 +100,126 @@ li {
 
 li time {
 	font-size: 2rem;
-	margin: 0 0 1rem 0;
+	margin: 0;
 	font-weight: 500;
+}
+
+li a {
+	color: black;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 li.today {
 	font-weight: 800;
 	background: #ffffff70;
+}
+
+
+/* Add these styles to your existing CSS file */
+.week-calendar-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.week-calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.day-name {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.week-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+
+.day-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-header {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.day-hours {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.hour-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.time-cell {
+  width: 20%;
+  padding: 0.5rem;
+  background-color: #f2f2f2;
+  text-align: center;
+  font-weight: bold;
+}
+
+.task-cell {
+  width: 80%;
+  padding: 0.5rem;
+  background: white;
+  text-align: left;
+}
+
+.event {
+  border: 1px solid var(--eventBorderColor);
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  background: var(--eventColor1);
+}
+
+.add-task-link {
+  display: inline-block;
+  padding: 5px 10px;
+  background: var(--eventColor4);
+  border: 1px solid var(--eventBorderColor);
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.add-task-link:hover {
+  background: var(--eventColor3);
 }

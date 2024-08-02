@@ -15,8 +15,9 @@
   <ul class="calendar-grid">
     <% @days.each do |day| %>
       <li class="<%= 'today' if day == Date.today %>">
-        <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
-        <time datetime="<%= day %>"><%= day.day %></time>
+        <%= link_to calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) do %>
+          <time datetime="<%= day %>"><%= day.day %></time>
+        <% end %>
         <%# Display any tasks or holidays here %>
         <% if day == Date.today %>
           <p>Today's tasks or holiday</p>

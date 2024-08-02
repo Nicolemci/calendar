@@ -1,23 +1,38 @@
-<h1>Calendar#show</h1>
-<p>Find me in app/views/calendar/show.html.erb</p>
-<h1>Tasks for <%= @day.date.strftime("%B %d, %Y") %></h1>
+<h1>Tasks for the Week of <%= @day.date.to_date.beginning_of_week.strftime("%B %d, %Y") %> - <%= @day.date.to_date.end_of_week.strftime("%B %d, %Y") %></h1>
 <%= link_to "Back to Calendar", root_path %>
 
-<table>
-  <% (0..23).each do |hour| %>
-    <tr>
-      <td class="time-cell"><%= hour %>:00</td>
-      <td class="task-cell">
-        <% task = @tasks.find { |t| t.start_time.hour == hour } %>
-        <% if task %>
-          <div class="event">
-            <p class="title"><%= task.title %></p>
-            <p class="description"><%= task.description %></p>
-          </div>
-        <% else %>
-          <%= link_to "Add Task", new_task_path(day_id: @day.id, hour: hour), class: "add-task-link" %>
-        <% end %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class="week-calendar-container">
+  <div class="week-calendar-header">
+    <% Date::DAYNAMES.each do |day| %>
+      <div class="day-name"><%= day %></div>
+    <% end %>
+  </div>
+
+  <div class="week-calendar-grid">
+    <% @day.date.to_date.beginning_of_week.upto(@day.date.to_date.end_of_week).each do |day| %>
+      <div class="day-column">
+        <div class="day-header">
+          <%= day.strftime("%A, %B %d") %>
+        </div>
+        <div class="day-hours">
+          <% (0..23).each do |hour| %>
+            <div class="hour-row">
+              <div class="time-cell"><%= hour %>:00</div>
+              <div class="task-cell">
+                <% task = @tasks.find { |t| t.start_time.hour == hour && t.start_time.to_date == day } %>
+                <% if task %>
+                  <div class="event">
+                    <p class="title"><%= task.title %></p>
+                    <p class="description"><%= task.description %></p>
+                  </div>
+                <% else %>
+                  <%= link_to "Add Task", new_task_path(day_id: Day.find_or_create_by(date: day).id, hour: hour), class: "add-task-link" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
