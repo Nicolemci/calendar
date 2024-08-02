@@ -1,18 +1,27 @@
 <h1><%= @date.strftime("%B %Y") %></h1>
-<%= link_to "Previous Month", root_path(date: @date.prev_month) %>
-<%= link_to "Next Month", root_path(date: @date.next_month) %>
+<p>Holidays and Daily Observances in the United States</p>
+<%= link_to "Previous", root_path(date: @date.prev_month) %>
+<%= link_to "Next", root_path(date: @date.next_month) %>
 
-<ul>
-  <% @days.each do |day| %>
-    <li class="<%= 'today' if day == Date.today %>">
-      <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
-      <time datetime="<%= day %>"><%= day.day %></time>
-      <%# Display any tasks or holidays here %>
-      <% if day == Date.today %>
-        <p>Today's tasks or holiday</p>
-      <% else %>
-        <p>No events</p>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<div class="calendar-container">
+  <div class="calendar-header">
+    <% Date::DAYNAMES.each do |day| %>
+      <div class="day-name"><%= day %></div>
+    <% end %>
+  </div>
+
+  <ul class="calendar-grid">
+    <% @days.each do |day| %>
+      <li class="<%= 'today' if day == Date.today %>">
+        <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
+        <time datetime="<%= day %>"><%= day.day %></time>
+        <%# Display any tasks or holidays here %>
+        <% if day == Date.today %>
+          <p>Today's tasks or holiday</p>
+        <% else %>
+          <p>No events</p>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
