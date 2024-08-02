@@ -1,7 +1,6 @@
 <h1><%= @date.strftime("%B %Y") %></h1>
-<p>Holidays and Daily Observances in the United States</p>
-<%= link_to "Previous", root_path(date: @date.prev_month) %>
-<%= link_to "Next", root_path(date: @date.next_month) %>
+<%= link_to "Previous Month", root_path(date: @date.prev_month) %>
+<%= link_to "Next Month", root_path(date: @date.next_month) %>
 
 <ul>
   <% @days.each do |day| %>
