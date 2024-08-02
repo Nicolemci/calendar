@@ -1,20 +1,19 @@
 <h1><%= @date.strftime("%B %Y") %></h1>
+<p>Holidays and Daily Observances in the United States</p>
 <%= link_to "Previous", root_path(date: @date.prev_month) %>
 <%= link_to "Next", root_path(date: @date.next_month) %>
 
-<table>
-  <tr>
-    <% Date::DAYNAMES.each do |day| %>
-      <th><%= day %></th>
-    <% end %>
-  </tr>
-  <% @days.each_slice(7) do |week| %>
-    <tr>
-      <% week.each do |day| %>
-        <td>
-          <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
-        </td>
+<ul>
+  <% @days.each do |day| %>
+    <li class="<%= 'today' if day == Date.today %>">
+      <%= link_to day.day, calendar_path(id: Day.find_or_create_by(date: day).id, date: @date) %>
+      <time datetime="<%= day %>"><%= day.day %></time>
+      <%# Display any tasks or holidays here %>
+      <% if day == Date.today %>
+        <p>Today's tasks or holiday</p>
+      <% else %>
+        <p>No events</p>
       <% end %>
-    </tr>
+    </li>
   <% end %>
-</table>
+</ul>
