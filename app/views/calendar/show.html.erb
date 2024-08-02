@@ -3,17 +3,18 @@
 
 <div class="week-calendar-container">
   <div class="week-calendar-header">
-    <% Date::DAYNAMES.each do |day| %>
-      <div class="day-name"><%= day %></div>
+    <% @day.date.to_date.beginning_of_week.upto(@day.date.to_date.end_of_week).each do |day| %>
+      <div class="day-name">
+        <%= day.strftime("%A") %> <br>
+        <%= day.strftime("%B %d") %>
+      </div>
     <% end %>
   </div>
 
   <div class="week-calendar-grid">
     <% @day.date.to_date.beginning_of_week.upto(@day.date.to_date.end_of_week).each do |day| %>
       <div class="day-column">
-        <div class="day-header">
-          <%= day.strftime("%A, %B %d") %>
-        </div>
+
         <div class="day-hours">
           <% (0..23).each do |hour| %>
             <div class="hour-row">
